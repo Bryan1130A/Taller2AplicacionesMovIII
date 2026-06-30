@@ -1,0 +1,37 @@
+name: terror_flix
+description: "Aplicación Flutter Terror Flix"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+  # Firebase
+  firebase_core: ^4.1.0
+  firebase_auth: ^6.0.1
+  firebase_database: ^12.0.1
+  firebase_storage: ^13.0.1
+
+  # Multimedia
+  image_picker: ^1.2.0
+  video_player: ^2.10.0
+  chewie: ^1.13.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
+    - icons/

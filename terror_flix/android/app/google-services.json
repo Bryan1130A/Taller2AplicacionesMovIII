@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "398425807691",
+    "project_id": "terrorflix-app",
+    "storage_bucket": "terrorflix-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398425807691:android:f09d0e49d777b3b6ebe6ce",
+        "android_client_info": {
+          "package_name": "com.example.terror_flix"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmQENZcbpnQrQPi0X0TNJjADed2UezCk0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
