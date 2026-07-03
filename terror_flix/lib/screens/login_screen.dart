@@ -14,6 +14,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final _formKey = GlobalKey<FormState>();
 
+  bool ocultarPassword = true;
+
   @override
   void dispose() {
     email.dispose();
@@ -22,6 +24,10 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> iniciarSesion() async {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email.text.trim(),
@@ -37,18 +43,30 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       );
 
-      Navigator.pushReplacementNamed(context, "/home");
+      Navigator.pushReplacementNamed(context, "/profile");
     } on FirebaseAuthException catch (e) {
       String mensaje = "Error al iniciar sesión";
 
-      if (e.code == "user-not-found") {
-        mensaje = "El usuario no existe";
-      } else if (e.code == "wrong-password") {
-        mensaje = "Contraseña incorrecta";
-      } else if (e.code == "invalid-email") {
-        mensaje = "Correo inválido";
-      } else if (e.code == "invalid-credential") {
-        mensaje = "Correo o contraseña incorrectos";
+      switch (e.code) {
+        case "user-not-found":
+          mensaje = "El usuario no existe";
+          break;
+
+        case "wrong-password":
+          mensaje = "Contraseña incorrecta";
+          break;
+
+        case "invalid-email":
+          mensaje = "Correo inválido";
+          break;
+
+        case "invalid-credential":
+          mensaje = "Correo o contraseña incorrectos";
+          break;
+
+        case "too-many-requests":
+          mensaje = "Demasiados intentos. Intente más tarde.";
+          break;
       }
 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -139,20 +157,29 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
 
                       const SizedBox(height: 30),
-
-                      TextFormField(
+                                            TextFormField(
                         controller: email,
                         keyboardType: TextInputType.emailAddress,
                         style: const TextStyle(color: Colors.white),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Ingrese el correo";
+                          }
+
+                          if (!value.contains("@")) {
+                            return "Correo inválido";
+                          }
+
+                          return null;
+                        },
                         decoration: InputDecoration(
                           prefixIcon: const Icon(
                             Icons.email,
                             color: Colors.red,
                           ),
                           labelText: "Correo electrónico",
-                          labelStyle: const TextStyle(
-                            color: Colors.white70,
-                          ),
+                          labelStyle:
+                              const TextStyle(color: Colors.white70),
                           filled: true,
                           fillColor: Colors.black54,
                           border: OutlineInputBorder(
@@ -160,9 +187,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: const BorderSide(
-                              color: Colors.red,
-                            ),
+                            borderSide:
+                                const BorderSide(color: Colors.red),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
@@ -178,17 +204,40 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       TextFormField(
                         controller: password,
-                        obscureText: true,
+                        obscureText: ocultarPassword,
                         style: const TextStyle(color: Colors.white),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Ingrese la contraseña";
+                          }
+
+                          if (value.length < 6) {
+                            return "La contraseña debe tener mínimo 6 caracteres";
+                          }
+
+                          return null;
+                        },
                         decoration: InputDecoration(
                           prefixIcon: const Icon(
                             Icons.lock,
                             color: Colors.red,
                           ),
-                          labelText: "Contraseña",
-                          labelStyle: const TextStyle(
-                            color: Colors.white70,
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              ocultarPassword
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: Colors.red,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                ocultarPassword = !ocultarPassword;
+                              });
+                            },
                           ),
+                          labelText: "Contraseña",
+                          labelStyle:
+                              const TextStyle(color: Colors.white70),
                           filled: true,
                           fillColor: Colors.black54,
                           border: OutlineInputBorder(
@@ -196,9 +245,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: const BorderSide(
-                              color: Colors.red,
-                            ),
+                            borderSide:
+                                const BorderSide(color: Colors.red),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
@@ -230,7 +278,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             foregroundColor: Colors.white,
                             elevation: 8,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
+                              borderRadius:
+                                  BorderRadius.circular(15),
                             ),
                           ),
                         ),
@@ -240,7 +289,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, "/register");
+                          Navigator.pushNamed(
+                            context,
+                            "/register",
+                          );
                         },
                         child: const Text(
                           "¿No tienes una cuenta? Regístrate",

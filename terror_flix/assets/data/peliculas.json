@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "titulo": "El Conjuro",
+    "descripcion": "Una familia es aterrorizada por una presencia demoníaca.",
+    "imagen": "assets/images/conjuro.jpg",
+    "video": "http://localhost:3000/videos/conjuro.mp4",
+    "genero": "Terror",
+    "duracion": "2h 22m",
+    "rating": 4.8
+  },
+  {
+    "id": 2,
+    "titulo": "Annabelle",
+    "descripcion": "Una muñeca poseída lleva el terror a una familia.",
+    "imagen": "assets/images/annabelle.jpg",
+    "video": "http://localhost:3000/videos/annabelle.mp4",
+    "genero": "Terror",
+    "duracion": "2h 01m",
+    "rating": 4.6
+  },
+  {
+    "id": 3,
+    "titulo": "Insidious",
+    "descripcion": "Una familia lucha contra entidades del más allá.",
+    "imagen": "assets/images/insidious.jpg",
+    "video": "http://localhost:3000/videos/insidious.mp4",
+    "genero": "Suspenso",
+    "duracion": "2h 10m",
+    "rating": 4.7
+  },
+  {
+    "id": 4,
+    "titulo": "IT",
+    "descripcion": "Un payaso aterroriza a un grupo de jóvenes.",
+    "imagen": "assets/images/it.jpg",
+    "video": "http://localhost:3000/videos/it.mp4",
+    "genero": "Terror",
+    "duracion": "2h 15m",
+    "rating": 4.9
+  },
+  {
+    "id": 5,
+    "titulo": "La Monja",
+    "descripcion": "Un convento esconde una entidad demoníaca.",
+    "imagen": "assets/images/monja.jpg",
+    "video": "http://localhost:3000/videos/monja.mp4",
+    "genero": "Terror",
+    "duracion": "2h 05m",
+    "rating": 4.5
+  },
+  {
+    "id": 6,
+    "titulo": "Saw",
+    "descripcion": "Jigsaw prepara nuevas trampas mortales.",
+    "imagen": "assets/images/saw.jpg",
+    "video": "http://localhost:3000/videos/saw.mp4",
+    "genero": "Gore",
+    "duracion": "2h 08m",
+    "rating": 4.8
+  }
+]

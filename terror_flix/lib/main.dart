@@ -7,6 +7,9 @@ import 'screens/splash_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/register_screen.dart';
 import 'screens/home_screen.dart';
+import 'screens/profile_screen.dart';
+import 'screens/library_screen.dart';
+import 'screens/favorites_screen.dart';
 import 'screens/add_movie_screen.dart';
 import 'screens/details_screen.dart';
 import 'screens/player_screen.dart';
@@ -28,29 +31,49 @@ class TerrorFlix extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Terror Flix',
+      title: "Terror Flix",
 
       theme: ThemeData(
         brightness: Brightness.dark,
         primarySwatch: Colors.red,
         scaffoldBackgroundColor: Colors.black,
+
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.black,
           centerTitle: true,
           elevation: 0,
         ),
+
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.red,
+            foregroundColor: Colors.white,
+          ),
+        ),
       ),
 
-      initialRoute: '/',
+      initialRoute: "/",
 
       routes: {
-        '/': (context) => const SplashScreen(),
-        '/login': (context) => const LoginScreen(),
-        '/register': (context) => const RegisterScreen(),
-        '/home': (context) => const HomeScreen(),
-        '/add': (context) => const AddMovieScreen(),
-        '/details': (context) => const DetailsScreen(),
-        '/player': (context) => const PlayerScreen(),
+        "/": (context) => const SplashScreen(),
+
+        "/login": (context) => const LoginScreen(),
+
+        "/register": (context) => const RegisterScreen(),
+
+        "/home": (context) => const HomeScreen(),
+
+        "/profile": (context) => const ProfileScreen(),
+
+        "/library": (context) => const LibraryScreen(),
+
+        "/favorites": (context) => const FavoritesScreen(),
+
+        "/add": (context) => const AddMovieScreen(),
+
+        "/details": (context) => const DetailsScreen(),
+
+        "/player": (context) => const PlayerScreen(),
       },
     );
   }

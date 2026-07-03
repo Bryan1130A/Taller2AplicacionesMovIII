@@ -2,6 +2,8 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
+import '../models/movie.dart';
+
 class PlayerScreen extends StatefulWidget {
   const PlayerScreen({super.key});
 
@@ -19,11 +21,11 @@ class _PlayerScreenState extends State<PlayerScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    final movie =
+    final Movie movie =
         ModalRoute.of(context)!.settings.arguments
-            as Map<String, dynamic>;
+            as Movie;
 
-    inicializar(movie["video"]);
+    inicializar(movie.video);
   }
 
   Future<void> inicializar(String url) async {
@@ -55,9 +57,11 @@ class _PlayerScreenState extends State<PlayerScreen> {
       ),
     );
 
-    setState(() {
-      cargando = false;
-    });
+    if (mounted) {
+      setState(() {
+        cargando = false;
+      });
+    }
   }
 
   @override
@@ -69,37 +73,32 @@ class _PlayerScreenState extends State<PlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final movie =
+    final Movie movie =
         ModalRoute.of(context)!.settings.arguments
-            as Map<String, dynamic>;
+            as Movie;
 
     return Scaffold(
       backgroundColor: Colors.black,
-
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text(movie["titulo"]),
+        title: Text(movie.titulo),
       ),
-
       body: Center(
         child: cargando
             ? const CircularProgressIndicator(
                 color: Colors.red,
               )
-            : movie["video"] == ""
+            : movie.video.isEmpty
                 ? Column(
                     mainAxisAlignment:
                         MainAxisAlignment.center,
                     children: const [
-
                       Icon(
                         Icons.videocam_off,
                         color: Colors.red,
                         size: 120,
                       ),
-
                       SizedBox(height: 20),
-
                       Text(
                         "Esta película aún no tiene video.",
                         style: TextStyle(

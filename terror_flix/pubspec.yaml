@@ -20,9 +20,10 @@ dependencies:
   firebase_storage: ^13.0.1
 
   # Multimedia
-  image_picker: ^1.2.0
+  image_picker: ^1.2.3
   video_player: ^2.10.0
   chewie: ^1.13.0
+  shared_preferences: ^2.5.5
 
 dev_dependencies:
   flutter_test:
@@ -33,5 +34,6 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/
-    - icons/
+    - assets/images/
+    - assets/data/
+    - assets/logos/
